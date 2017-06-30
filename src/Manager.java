@@ -26,6 +26,7 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 
 	JRadioButton ellipseRB;
 	JRadioButton rectangleRB;
+	JRadioButton triangleRB;
 
 	public static void main(String[] args) {
 		new Manager();
@@ -38,28 +39,31 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 		blueTF = new JTextField(3);
 
 		shapeGroup = new ButtonGroup();
-		ellipseRB = new JRadioButton("ellipse");
-		rectangleRB = new JRadioButton("rectangle");
+		ellipseRB = new JRadioButton("Ellipse");
+		rectangleRB = new JRadioButton("Rectangle");
+		triangleRB = new JRadioButton("Triangle");
 
 		shapeGroup.add(ellipseRB);
 		shapeGroup.add(rectangleRB);
+		shapeGroup.add(triangleRB);
 
 		ellipseRB.setSelected(true);
 		add(ellipseRB);
 		add(rectangleRB);
+		add(triangleRB);
 
 		redTF.setText("0");
 		greenTF.setText("0");
 		blueTF.setText("0");
 
-		add(new JLabel("red:"));
+		add(new JLabel("Red:"));
 		add(redTF);
-		add(new JLabel("green:"));
+		add(new JLabel("Green:"));
 		add(greenTF);
-		add(new JLabel("blue:"));
+		add(new JLabel("Blue:"));
 		add(blueTF);
 
-		setPreferredSize(new Dimension(500, 500));
+		setPreferredSize(new Dimension(550, 500));
 		window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.addMouseListener(this);
@@ -87,6 +91,9 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 		} else if (rectangleRB.isSelected()) {
 			((Rectangle) currentShape).setWidth(e.getX() - currentShape.getX());
 			((Rectangle) currentShape).setHeight(e.getY() - currentShape.getY());
+		} else if (triangleRB.isSelected()) {
+			((Triangle) currentShape).setWidth(e.getX() - currentShape.getX());
+			((Triangle) currentShape).setHeight(e.getY() - currentShape.getY());
 		}
 
 		repaint();
@@ -99,7 +106,6 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -109,6 +115,8 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 			currentShape = new Ellipse(e.getX(), e.getY(), 0, 0);
 		} else if (rectangleRB.isSelected()) {
 			currentShape = new Rectangle(e.getX(), e.getY(), 0, 0);
+		} else if (triangleRB.isSelected()) {
+			currentShape = new Triangle(e.getX(), e.getY(), 0, 0);
 		}
 
 		int r = clamp(Integer.parseInt(redTF.getText()), 0, 255);
@@ -124,13 +132,11 @@ public class Manager extends JPanel implements MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
